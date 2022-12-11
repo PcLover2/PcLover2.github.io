@@ -204,4 +204,7 @@ footer{
     .hero h2{
         font-size: 80px;
     }
+    footer{
+        font-size: 32px;
+    }
 }
