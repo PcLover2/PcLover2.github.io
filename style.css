@@ -114,6 +114,7 @@ HERO
 }
 
 .centered{
+    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -132,4 +133,19 @@ HERO
 .hero h2{
     font-size: 40;
     color: 020024;
+}
+
+/* ==========================================================================
+FOOTER
+========================================================================== */
+
+footer p{
+    color: rgb(229, 229, 229);
+    text-align: center;
+}
+
+footer{
+    position: relative;
+    width: 100%;
+    height: 100;
 }
