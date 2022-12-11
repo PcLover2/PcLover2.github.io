@@ -112,6 +112,7 @@ HERO
 
 .centered{
     margin: 0;
+    width: 100%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -149,7 +150,7 @@ footer p{
 footer{
     position: relative;
     width: 100%;
-    height: 100;
+    min-height: 100px;
     background-color: rgb(1, 131, 150);
 }
 
@@ -159,16 +160,16 @@ footer{
 @media screen and (max-width: 1080px) {
 
     .logoimg{
-        max-height: 8rem;
-        padding: 20px;
+        max-height: 12rem;
+        padding: 5rem;
     }
 
     nav{
-        padding: 20px;
+        padding: 30px;
     }
 
     li{
-        margin: 10px 16px 0px 16px;
+        margin: 15px 20px 0px 20px;
     }
 
     li a:hover{
@@ -177,7 +178,7 @@ footer{
 
     li a{
         padding: 10px;
-        font-size: 32px;
+        font-size: 50px;
         border-radius: 30px;
     }
 
@@ -202,9 +203,10 @@ footer{
     }
 
     .hero h2{
-        font-size: 80px;
+        font-size: 100px;
     }
     footer{
-        font-size: 32px;
+        font-size: 75px;
+        min-height: 400px;
     }
 }
