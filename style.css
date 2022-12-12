@@ -3,7 +3,7 @@ HTML
 ========================================================================== */
 
 body{
-    background-color: rgb(2, 0, 36);
+    background-color: rgb(1, 131, 150);
     font-family: 'Raleway', sans-serif;
     margin: 0;
 }
@@ -145,12 +145,13 @@ FOOTER
 footer p{
     color: rgb(229, 229, 229);
     text-align: center;
+    margin-top: -75px;
 }
 
 footer{
     position: relative;
     width: 100%;
-    min-height: 100px;
+    height: 0px;
     background-color: rgb(1, 131, 150);
 }
 
@@ -205,8 +206,13 @@ footer{
     .hero h2{
         font-size: 100px;
     }
+    
     footer{
-        font-size: 75px;
-        min-height: 400px;
+        font-size: 60px;
+        height: 0px;
+    }
+
+    footer p{
+        margin: -75px;
     }
 }
