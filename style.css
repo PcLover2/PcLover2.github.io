@@ -103,14 +103,14 @@ li a{
     background-image: url(clock.svg);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 25px;
+    background-size: 27px;
 }
 
 .applauncher a:hover{
-    background-image: url(apps.svg);
+    background-image: url(app.svg);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 25px;
+    background-size: 28px;
 }
 /* ==========================================================================
 HERO
