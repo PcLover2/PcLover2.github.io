@@ -99,14 +99,21 @@ li a{
     background-size: 25px;
 }
 
+.typerip a:hover{
+    background-image: url(font.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 26px;
+}
+
 .clock a:hover{
     background-image: url(clock.svg);
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 27px;
+    background-size: 26px;
 }
 
-.applauncher a:hover{
+.AppLauncher a:hover{
     background-image: url(app.svg);
     background-position: center;
     background-repeat: no-repeat;
