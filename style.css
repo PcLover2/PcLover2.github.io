@@ -99,6 +99,19 @@ li a{
     background-size: 25px;
 }
 
+.clock a:hover{
+    background-image: url(clock.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+.applauncher a:hover{
+    background-image: url(apps.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
 /* ==========================================================================
 HERO
 ========================================================================== */
