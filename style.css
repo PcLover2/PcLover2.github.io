@@ -120,8 +120,8 @@ li a{
     background-size: 28px;
 }
 
-.shirley a:hover{
-    background-image: url(shirley.png);
+.flipper a:hover{
+    background-image: url(https://cdn.flipperzero.one/white_transparent.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 28px;
