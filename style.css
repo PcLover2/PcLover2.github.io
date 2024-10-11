@@ -121,7 +121,14 @@ li a{
 }
 
 .flipper a:hover{
-    background-image: url(https://cdn.flipperzero.one/white_transparent.png);
+    background-image: url(flipper.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 28px;
+}
+
+.family a:hover{
+    background-image: url(family.png);
     background-position: center;
     background-repeat: no-repeat;
     background-size: 28px;
