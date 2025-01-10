@@ -35,7 +35,7 @@ class Header extends HTMLElement {
     <li><a href="sites.html">Siteportfolio</a></li>
     <li><a href="https://www.youtube.com/watch?v=Xc7IlJvHIcQ&list=PLY3A6SqGwlMOCAhy7Ru8FAqnpr130mf8P">Lucien Fenaux - Filmpjes</a></li>    
     <li><a href="https://pclover2.github.io/Clock">Klok</a></li>
-    <li><a href="https://pclover2.github.io/Flipper - V2 Match">FlipperHub</a></li>
+    <li><a href="https://pclover2.github.io/Flipper">Flipper - V2 Match</a></li>
     <li><a href="https://pclover2.github.io/Familie.html">Stamboom</a></li>
 
     
