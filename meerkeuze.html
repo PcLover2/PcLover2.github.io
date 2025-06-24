@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://unpkg.com/marx-css/css/marx.min.css">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            text-align: center;
+            width: 300px;
+        }
+        input { 
+            padding: 8px;
+            margin: 5px 0;
+        }
+        .result {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="number" id="total" placeholder="Totaal aantal vragen" min="1" oninput="calculateScore()">
+        <input type="number" id="correct" placeholder="Aantal juist" min="0" oninput="calculateScore()">
+        <input type="number" id="wrong" placeholder="Aantal fout" min="0" oninput="calculateScore()">
+        <div class="result" id="result"></div>
+    </div>
+    
+    <script>
+        function calculateScore() {
+            let total = parseInt(document.getElementById('total').value) || 0;
+            let correct = parseInt(document.getElementById('correct').value) || 0;
+            let wrong = parseInt(document.getElementById('wrong').value) || 0;
+            let unanswered = total - (correct + wrong);
+
+            if (correct + wrong > total) {
+                document.getElementById('result').innerHTML = "Ongeldige invoer!";
+                return;
+            }
+
+            let score = (correct * 3) + (wrong * -1) + (unanswered * 0);
+            let maxScore = total * 3;
+            let percentage = ((score / maxScore) * 100).toFixed(2);
+
+            document.getElementById('result').innerHTML = `Score: ${score}/${maxScore} (${percentage}%)`;
+        }
+    </script>
+</body>
+</html>
