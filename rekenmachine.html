@@ -3,16 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Calculator</title>
+  <title>TAT Calculator</title>
   <style>
-    /* Load custom font */
     @font-face {
       font-family: 'SportyPro';
       src: url('https://raw.githubusercontent.com/PcLover2/PcLover2.github.io/refs/heads/main/assets/sporty-pro-regular-cd.otf') format('opentype');
       font-weight: normal;
       font-style: normal;
     }
-
     body {
       font-family: 'SportyPro', sans-serif;
       display: flex;
@@ -21,6 +19,12 @@
       height: 100vh;
       background: #fff;
       margin: 0;
+      flex-direction: column;
+    }
+    .info {
+      font-size: 0.9em;
+      color: gray;
+      margin-bottom: 10px;
     }
     .calculator {
       background: white;
@@ -49,31 +53,24 @@
       grid-template-columns: repeat(4, 1fr);
       gap: 0;
     }
-.keys button {
-  font-size: 1.2em;
-  padding: 20px;
-  border-top: 1px solid rgb(230,230,230);
-  border-left: 1px solid rgb(230,230,230);
-  border-right: none;
-  border-bottom: none;
-  background: white;
-  cursor: pointer;
-  outline: none;
-  font-family: 'SportyPro', sans-serif;
-}
-
-/* Add right border to last column buttons */
-.keys button:nth-child(4n + 3) {
-  border-right: 1px solid rgb(230,230,230);
-}
-
-/* Add bottom border to buttons in last row */
-/* Since you have 18 buttons (rows x columns = 5x4 = 20, but you have 18 here, but grid is 4 cols) */
-/* Let's identify last row by position: buttons 15-18 are last row */
-/* So add bottom border to last 4 buttons */
-.keys button:nth-child(n+16) {
-  border-bottom: 1px solid rgb(230,230,230);
-}
+    .keys button {
+      font-size: 1.2em;
+      padding: 20px;
+      border-top: 1px solid rgb(230,230,230);
+      border-left: 1px solid rgb(230,230,230);
+      border-right: none;
+      border-bottom: none;
+      background: white;
+      cursor: pointer;
+      outline: none;
+      font-family: 'SportyPro', sans-serif;
+    }
+    .keys button:nth-child(4n + 3) {
+      border-right: 1px solid rgb(230,230,230);
+    }
+    .keys button:nth-child(n+16) {
+      border-bottom: 1px solid rgb(230,230,230);
+    }
     button:focus {
       outline: none;
     }
@@ -87,143 +84,175 @@
     button.equal {
       background: #62a5d1;
       grid-column: span 2;
-            color: white;
-        border-right: 1px solid rgb(230,230,230);
-
-
+      color: white;
+      border-right: 1px solid rgb(230,230,230);
     }
     button:active {
       background: #ccc;
     }
+    #hiddenInput {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+      width: 1px;
+      height: 1px;
+      left: -100px;
+      top: -100px;
+    }
   </style>
 </head>
 <body>
-  <div class="calculator">
+  <div class="info">
+    Gebruik <strong>^</strong> voor machten!<br>
+    Ook op het echte TAT!
+  </div>
+
+  <input id="hiddenInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+
+  <div class="calculator" tabindex="0" onclick="document.getElementById('hiddenInput').focus();">
     <div class="sub-display" id="expression"></div>
     <div class="display" id="result"></div>
     <div class="keys">
-      <!-- Row 1 -->
-      <button style ="grid-column: span 2;" class="clear" onclick="clearDisplay()" tabindex="-1">AC</button>
+      <button style="grid-column: span 2;" class="clear" onclick="clearDisplay()" tabindex="-1">AC</button>
       <button onclick="press('%')" tabindex="-1">%</button>
       <button class="operator" onclick="press('/')" tabindex="-1">÷</button>
       <button onclick="press('7')" tabindex="-1">7</button>
-
-      <!-- Row 2 -->
       <button onclick="press('8')" tabindex="-1">8</button>
       <button onclick="press('9')" tabindex="-1">9</button>
       <button class="operator" onclick="press('*')" tabindex="-1">×</button>
       <button onclick="press('4')" tabindex="-1">4</button>
-
-      <!-- Row 3 -->
       <button onclick="press('5')" tabindex="-1">5</button>
       <button onclick="press('6')" tabindex="-1">6</button>
       <button class="operator" onclick="press('-')" tabindex="-1">-</button>
       <button onclick="press('1')" tabindex="-1">1</button>
-
-      <!-- Row 4 -->
       <button onclick="press('2')" tabindex="-1">2</button>
       <button onclick="press('3')" tabindex="-1">3</button>
       <button class="operator" onclick="press('+')" tabindex="-1">+</button>
       <button onclick="press('0')" tabindex="-1">0</button>
-
-      <!-- Row 5 -->
       <button onclick="press('.')" tabindex="-1">.</button>
       <button class="equal" onclick="calculate()" tabindex="0">=</button>
     </div>
   </div>
+
   <script>
-  let expression = '';
-  let resultShown = false;
+    let expression = '';
+    let resultShown = false;
 
-function press(value) {
-  if (value === '%') {
-    // Convert last number in the expression to a percentage
-    const match = expression.match(/(\d+\.?\d*)$/);
-    if (match) {
-      const number = match[1];
-      const percentValue = parseFloat(number) / 100;
-      expression = expression.slice(0, -number.length) + percentValue;
-    }
-  } else {
-    if (resultShown) {
-      if (isOperator(value)) {
-        expression = document.getElementById('result').textContent + value;
-      } else {
-        expression = value;
-      }
-      resultShown = false;
-    } else {
-      expression += value;
-    }
-  }
-  updateDisplay();
-}
-
-
-  function clearDisplay() {
-    expression = '';
-    resultShown = false;
-    updateDisplay();
-    document.getElementById('result').textContent = '';
-  }
-
-  function calculate() {
-    try {
-      const result = eval(expression);
-      document.getElementById('result').textContent = result;
-      resultShown = true;
-    } catch {
-      document.getElementById('result').textContent = 'Error';
-    }
-  }
-
-  function updateDisplay() {
-    let pretty = expression.replace(/\*/g, '×').replace(/\//g, '÷');
-    document.getElementById('expression').textContent = pretty;
-  }
-
-  function isOperator(char) {
-    return ['+', '-', '*', '/', '%'].includes(char);
-  }
-
-  document.addEventListener('keydown', (event) => {
-    const key = event.key;
-
-    if (key === 'Enter') {
-      calculate();
-      event.preventDefault();
-      return;
-    }
-
-    if (!isNaN(key) || ['+', '-', '*', '/', '.', '%'].includes(key)) {
-      press(key);
-      event.preventDefault();
-      return;
-    }
-
-    if (key.toLowerCase() === 'c') {
-      clearDisplay();
-      event.preventDefault();
-      return;
-    }
-
-    if (key === 'Backspace') {
-      expression = expression.slice(0, -1);
-      updateDisplay();
-      event.preventDefault();
-      return;
-    }
-  });
-
-  document.querySelectorAll('.keys button').forEach(btn => {
-    if (btn.textContent !== '=') {
-      btn.addEventListener('keydown', e => {
-        if (e.key === 'Enter') {
-          e.preventDefault();
+    function press(value) {
+      if (value === '%') {
+        const match = expression.match(/(\d+\.?\d*)$/);
+        if (match) {
+          const number = match[1];
+          const percentValue = parseFloat(number) / 100;
+          expression = expression.slice(0, -number.length) + percentValue;
         }
-      });
+      } else if (value === '^') {
+        if (resultShown) {
+          expression = '';
+          document.getElementById('result').textContent = '';
+          resultShown = false;
+        }
+        expression += '**';
+      } else {
+        if (resultShown) {
+          if (isOperator(value)) {
+            expression = document.getElementById('result').textContent + value;
+          } else {
+            expression = value;
+            document.getElementById('result').textContent = '';
+          }
+          resultShown = false;
+        } else {
+          expression += value;
+        }
+      }
+      updateDisplay();
     }
-  });
-</script>
+
+    function clearDisplay() {
+      expression = '';
+      resultShown = false;
+      updateDisplay();
+      document.getElementById('result').textContent = '';
+      document.getElementById('hiddenInput').value = '';
+      document.getElementById('hiddenInput').focus();
+    }
+
+    function calculate() {
+      try {
+        const result = eval(expression);
+        document.getElementById('result').textContent = result;
+        resultShown = true;
+      } catch {
+        document.getElementById('result').textContent = 'Error';
+      }
+    }
+
+    function updateDisplay() {
+      let pretty = expression
+        .replace(/\*\*/g, '^')
+        .replace(/\*/g, '×')
+        .replace(/\//g, '÷');
+      document.getElementById('expression').textContent = pretty;
+    }
+
+    function isOperator(char) {
+      return ['+', '-', '*', '/', '%'].includes(char);
+    }
+
+    window.onload = () => {
+      document.getElementById('hiddenInput').focus();
+    };
+
+    const hiddenInput = document.getElementById('hiddenInput');
+    hiddenInput.addEventListener('input', (e) => {
+      const val = hiddenInput.value;
+      if (!val) return;
+      const newChar = val[val.length - 1];
+      if (newChar === undefined) return;
+
+      if (resultShown) {
+        if (isOperator(newChar)) {
+          expression = document.getElementById('result').textContent + newChar;
+          document.getElementById('result').textContent = '';
+          resultShown = false;
+        } else {
+          expression = '';
+          document.getElementById('result').textContent = '';
+          resultShown = false;
+          if (!isOperator(newChar)) {
+            expression += newChar;
+          }
+        }
+        updateDisplay();
+      } else {
+        if (!isNaN(newChar) || ['+', '-', '*', '/', '.', '%', '^'].includes(newChar)) {
+          press(newChar);
+        }
+      }
+
+      hiddenInput.value = '';
+    });
+
+    hiddenInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Backspace') {
+        expression = expression.slice(0, -1);
+        updateDisplay();
+        e.preventDefault();
+      }
+      if (e.key === 'Enter') {
+        calculate();
+        e.preventDefault();
+      }
+      if (e.key.toLowerCase() === 'c') {
+        clearDisplay();
+        e.preventDefault();
+      }
+    });
+
+    document.querySelector('.calculator').addEventListener('click', () => {
+      hiddenInput.focus();
+    });
+  </script>
 </body>
 </html>
